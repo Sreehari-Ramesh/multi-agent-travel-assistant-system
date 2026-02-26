@@ -1,15 +1,17 @@
+import os
 from functools import lru_cache
 from pydantic import Field
 from pydantic_settings import BaseSettings
-
+from dotenv import load_dotenv
+load_dotenv()
 
 class Settings(BaseSettings):
     app_name: str = "dubai-travel-multi-agent"
     api_prefix: str = "/api"
 
     # Gemini / ADK
-    google_api_key: str = Field(..., env="GOOGLE_API_KEY")
-    adk_model: str = "gemini-2.5-flash"
+    openai_api_key: str = Field(..., env="OPENAI_API_KEY")
+    adk_model: str = "gpt-4.1-2025-04-14"
 
     # CORS / frontend
     frontend_origin: str | None = Field(default=None, env="FRONTEND_ORIGIN")

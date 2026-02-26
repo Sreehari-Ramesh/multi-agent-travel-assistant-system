@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+import os
 from datetime import datetime
 from typing import Any
 
@@ -19,18 +19,19 @@ from .models import ChatMessage, ChatMessageCreate, ChatMessageResponse, ChatRol
 
 
 settings = get_settings()
+os.environ["OPENAI_API_KEY"] = settings.openai_api_key
+
 root_agent, runner = build_agents()
 
 app = FastAPI(title=settings.app_name)
 
-if settings.frontend_origin:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=[settings.frontend_origin],
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get("/health", tags=["system"])

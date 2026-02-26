@@ -8,6 +8,8 @@ from typing import Dict, List
 from google.genai import types as genai_types
 
 from .models import ChatMessage, ChatRole
+from google.adk.errors.already_exists_error import AlreadyExistsError
+
 
 
 @dataclass
@@ -70,12 +72,14 @@ async def process_pending_messages(
             )
 
             # Ensure a session exists for this conversation.
-            session_service.create_session(
-                app_name=app_name,
-                user_id=conversation_id,
-                session_id=conversation_id,
-                exists_ok=True,
-            )
+            try:
+                await session_service.create_session(
+                    app_name=app_name,
+                    user_id=conversation_id,
+                    session_id=conversation_id,
+                )
+            except AlreadyExistsError:
+                pass
 
             events = runner.run(
                 user_id=conversation_id,

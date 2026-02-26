@@ -3,6 +3,8 @@ from __future__ import annotations
 from typing import List, Optional
 
 from google.adk.agents.llm_agent import LlmAgent
+from google.adk.models.lite_llm import LiteLlm  # For multi-model support
+from google.adk.agents import Agent
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
 from google.adk.tools.agent_tool import AgentTool
@@ -155,8 +157,8 @@ def build_agents() -> tuple[LlmAgent, Runner]:
     settings = get_settings()
 
     # Information agent - focuses on images, policies, and pricing.
-    information_agent = LlmAgent(
-        model=settings.adk_model,
+    information_agent = Agent(
+        model=LiteLlm(model=settings.adk_model),
         name="information_agent",
         description="Provides Dubai activity information, images, policies, and pricing.",
         instruction=(
@@ -172,8 +174,8 @@ def build_agents() -> tuple[LlmAgent, Runner]:
     )
 
     # Booking agent - focuses on creating bookings and handling unavailability.
-    booking_agent = LlmAgent(
-        model=settings.adk_model,
+    booking_agent = Agent(
+        model=LiteLlm(model=settings.adk_model),
         name="booking_agent",
         description="Handles booking requests for Dubai activities, including variations and group sizes.",
         instruction=(
@@ -192,7 +194,7 @@ def build_agents() -> tuple[LlmAgent, Runner]:
 
     # Conversation handler / root agent.
     root_agent = LlmAgent(
-        model=settings.adk_model,
+        model=LiteLlm(model=settings.adk_model),
         name="conversation_handler",
         description=(
             "WhatsApp-style travel assistant for booking and learning about Dubai activities. "

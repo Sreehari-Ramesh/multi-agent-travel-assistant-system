@@ -215,3 +215,141 @@ How interruption handling and message aggregation work.
 Enhance the UI to show activity images inline when the assistant mentions them.
 Add a small dev control/endpoint to easily simulate supervisor approvals/rejections with structured payloads.
 If you’d like, I can next focus on: (a) polishing the WhatsApp UI further, (b) expanding the ADK agent instructions/tools, or (c) writing the README + architecture doc.
+
+
+If index.html is missing:
+
+Run this from frontend folder:
+
+npm create vite@latest .
+
+############################
+Perfect — we found the issue.
+
+You **do not have `index.html`** in the frontend root.
+
+That is exactly why Vite is returning 404.
+
+Vite serves the `index.html` file from the project root.
+If it doesn’t exist → 404.
+
+---
+
+# ✅ Why This Happened
+
+You likely:
+
+* Copied only `src/`, `package.json`, and `node_modules`
+* But never created the actual Vite project scaffold
+
+A Vite React project must have:
+
+```
+frontend/
+ ├── index.html   ❗ REQUIRED
+ ├── package.json
+ ├── vite.config.ts (or js)
+ └── src/
+```
+
+You’re missing:
+
+* index.html
+* vite.config.ts
+* main.tsx (probably inside src)
+
+---
+
+# 🚀 CLEAN FIX (DO THIS)
+
+Inside your `frontend` folder:
+
+### 1️⃣ Delete everything inside frontend EXCEPT:
+
+Keep:
+
+* src/ (your code)
+* package.json
+* package-lock.json (optional)
+
+Then run:
+
+```bash
+npm create vite@latest .
+```
+
+Choose:
+
+* React
+* TypeScript (if you're using TS)
+
+It will generate:
+
+* index.html
+* vite.config.ts
+* proper project structure
+
+---
+
+### 2️⃣ Then run:
+
+```bash
+npm install
+```
+
+---
+
+### 3️⃣ Make sure your structure becomes:
+
+```
+frontend/
+ ├── index.html
+ ├── package.json
+ ├── vite.config.ts
+ └── src/
+     ├── main.tsx
+     ├── App.tsx
+     ├── Chat.tsx
+```
+
+If `main.tsx` doesn’t exist, create it:
+
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './App.css'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
+```
+
+---
+
+### 4️⃣ Then run:
+
+```bash
+npm run dev
+```
+
+Now open the port it shows.
+
+It will work.
+
+---
+
+# 🎯 Root Cause Summary
+
+Your frontend was not actually a Vite project.
+It was just a folder with React files.
+
+Vite needs index.html at root to serve `/`.
+
+---
+
+Do this and tell me once it starts loading — then we’ll test full chat flow.
+######################
+
