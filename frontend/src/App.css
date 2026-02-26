@@ -1,0 +1,176 @@
+.app-root {
+  width: 100vw;
+  height: 100vh;
+  background: #0a1014;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+}
+
+.chat-root {
+  width: min(480px, 100vw);
+  height: min(720px, 100vh);
+  background: #050b0f;
+  border-radius: 16px;
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #202c33, #111b21);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00a884, #25d366);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e9edef;
+  margin-right: 10px;
+}
+
+.chat-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e9edef;
+}
+
+.chat-subtitle {
+  font-size: 12px;
+  color: #8696a0;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px 12px;
+  background:
+    linear-gradient(180deg, #0b141a 0, #111b21 60%, #0a1014 100%),
+    url('https://i.imgur.com/qIufhof.png');
+  background-blend-mode: overlay;
+  overflow-y: auto;
+}
+
+.bubble-row {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.align-right {
+  justify-content: flex-end;
+}
+
+.align-left {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: 70%;
+  padding: 6px 10px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.35;
+  position: relative;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.bubble-user {
+  background: #005c4b;
+  color: #e9edef;
+  border-bottom-right-radius: 2px;
+}
+
+.bubble-assistant {
+  background: #202c33;
+  color: #e9edef;
+  border-bottom-left-radius: 2px;
+}
+
+.bubble-supervisor {
+  background: #2b3a42;
+  color: #e9edef;
+  border-bottom-left-radius: 2px;
+  border-left: 2px solid #ffd369;
+}
+
+.bubble-meta {
+  font-size: 11px;
+  color: #b1b3b5;
+  margin-bottom: 2px;
+}
+
+.bubble-text {
+  white-space: pre-wrap;
+}
+
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  background: #202c33;
+  gap: 8px;
+}
+
+.chat-input {
+  flex: 1;
+  border-radius: 999px;
+  border: none;
+  padding: 10px 14px;
+  background: #111b21;
+  color: #e9edef;
+  font-size: 14px;
+  outline: none;
+}
+
+.chat-input::placeholder {
+  color: #8696a0;
+}
+
+.chat-send-btn {
+  border-radius: 999px;
+  border: none;
+  background: #00a884;
+  color: #111b21;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease;
+}
+
+.chat-send-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+  box-shadow: none;
+}
+
+.chat-send-btn:not(:disabled):hover {
+  background: #02c298;
+  box-shadow: 0 0 12px rgba(0, 168, 132, 0.6);
+}
+
+.chat-send-btn:not(:disabled):active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
