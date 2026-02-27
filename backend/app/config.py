@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     smtp_from_email: str | None = Field(default=None, env="SMTP_FROM_EMAIL")
     supervisor_email: str | None = Field(default=None, env="SUPERVISOR_EMAIL")
 
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

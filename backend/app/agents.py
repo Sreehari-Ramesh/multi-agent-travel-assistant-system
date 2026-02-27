@@ -12,6 +12,7 @@ from google.genai import types as genai_types
 
 from .config import get_settings
 from .email_service import send_escalation_email
+from .conversation_manager import get_conversation_messages
 from .mock_db import (
     list_activities,
     get_activity,
@@ -53,6 +54,49 @@ def get_pricing_for_variation_tool(activity_id: str, variation_id: str) -> dict:
         "status": "success",
         "activity_id": activity_id,
         "variation": variation.dict(),
+    }
+
+
+def escalate_to_supervisor_tool(
+    conversation_id: str,
+    user_request: str,
+    subject: str | None = None,
+) -> dict:
+    """
+    Escalate a user request to a human supervisor via email.
+
+    This is the *only* supported way for the assistant to say "I've escalated it":
+    the LLM must call this tool so the backend actually sends the email.
+    """
+    print("ESCALATE TOOL EXECUTED")
+    settings = get_settings()
+    subj = subject or f"[Dubai Travel Assistant] Human escalation ({conversation_id})"
+
+    msgs = get_conversation_messages(conversation_id)
+    transcript_lines = []
+    for m in msgs[-20:]:
+        transcript_lines.append(f"{m.role.value}: {m.text}")
+    transcript = "\n".join(transcript_lines) if transcript_lines else "(no prior messages)"
+
+    body = (
+        "A user requested human assistance / supervisor review.\n\n"
+        f"Conversation ID: {conversation_id}\n\n"
+        f"User request:\n{user_request}\n\n"
+        "Recent transcript (last 20 messages):\n"
+        f"{transcript}\n"
+    )
+
+    send_escalation_email(
+        subject=subj,
+        body=body,
+        to_email=settings.supervisor_email,
+    )
+
+    return {
+        "status": "success",
+        "message": (
+            "Escalation email sent to supervisor. You will see their reply in this chat once received."
+        ),
     }
 
 
@@ -210,6 +254,8 @@ def build_agents() -> tuple[LlmAgent, Runner]:
             "- If the user clearly wants to book or reserve, use the booking tools.\n"
             "- The user may send several short messages in a row; treat them as a single request.\n"
             "- Always confirm details back to the user in natural language.\n"
+            "- If the user asks for a manager/supervisor/human, you MUST call `escalate_to_supervisor_tool`.\n"
+            "- NEVER claim an escalation was sent unless `escalate_to_supervisor_tool` returned success.\n"
             "- When a booking goes to supervisor review, explain that they will see their reply in this chat."
         ),
         tools=[
@@ -219,6 +265,7 @@ def build_agents() -> tuple[LlmAgent, Runner]:
             get_activity_details_tool,
             get_pricing_for_variation_tool,
             book_activity_tool,
+            escalate_to_supervisor_tool,
         ],
     )
 

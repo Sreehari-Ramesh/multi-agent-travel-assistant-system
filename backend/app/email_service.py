@@ -17,7 +17,11 @@ def send_escalation_email(
     print the email contents to stdout so the flow can be demonstrated
     without a real email provider.
     """
+    print("SEND_ESCALATION_EMAIL FUNCTION CALLED")
     settings = get_settings()
+    print("SMTP HOST:", settings.smtp_host)
+    print("SMTP USER:", settings.smtp_username)
+    print("SUPERVISOR:", settings.supervisor_email)
     recipient = to_email or settings.supervisor_email
 
     if not recipient:
@@ -53,6 +57,7 @@ def send_escalation_email(
                 server.starttls()
                 server.login(settings.smtp_username, settings.smtp_password)
             server.send_message(msg)
+
     except Exception as exc:  # pragma: no cover - best effort logging
         print(f"[EmailService] Failed to send escalation email: {exc}")
 
