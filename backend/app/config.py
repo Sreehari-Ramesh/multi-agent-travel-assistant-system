@@ -1,11 +1,12 @@
 import os
 from functools import lru_cache
-from pydantic import Field
+from pydantic import Field, ConfigDict
 from pydantic_settings import BaseSettings
 from dotenv import load_dotenv
 load_dotenv()
 
 class Settings(BaseSettings):
+    model_config = ConfigDict(extra="ignore")
     app_name: str = "dubai-travel-multi-agent"
     api_prefix: str = "/api"
 
@@ -24,10 +25,15 @@ class Settings(BaseSettings):
     smtp_from_email: str | None = Field(default=None, env="SMTP_FROM_EMAIL")
     supervisor_email: str | None = Field(default=None, env="SUPERVISOR_EMAIL")
 
+    # IMAP (ADD THIS BLOCK)
+    supervisor_imap_host: str | None = Field(default=None, env="SUPERVISOR_IMAP_HOST")
+    supervisor_imap_port: int | None = Field(default=None, env="SUPERVISOR_IMAP_PORT")
+    supervisor_imap_email: str | None = Field(default=None, env="SUPERVISOR_IMAP_EMAIL")
+    supervisor_imap_app_password: str | None = Field(default=None, env="SUPERVISOR_IMAP_APP_PASSWORD")
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    # class Config:
+    #     env_file = ".env"
+    #     env_file_encoding = "utf-8"
 
 
 @lru_cache

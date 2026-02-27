@@ -62,15 +62,15 @@ def escalate_to_supervisor_tool(
     user_request: str,
     subject: str | None = None,
 ) -> dict:
-    """
-    Escalate a user request to a human supervisor via email.
-
-    This is the *only* supported way for the assistant to say "I've escalated it":
-    the LLM must call this tool so the backend actually sends the email.
-    """
     print("ESCALATE TOOL EXECUTED")
+
     settings = get_settings()
-    subj = subject or f"[Dubai Travel Assistant] Human escalation ({conversation_id})"
+
+    subj = subject or (
+        "[Dubai Travel Assistant]"
+        "[type=human_escalation]"
+        f"[conversation_id={conversation_id}]"
+    )
 
     msgs = get_conversation_messages(conversation_id)
     transcript_lines = []
@@ -95,7 +95,8 @@ def escalate_to_supervisor_tool(
     return {
         "status": "success",
         "message": (
-            "Escalation email sent to supervisor. You will see their reply in this chat once received."
+            "Escalation email sent to supervisor. "
+            "You will see their reply in this chat once received."
         ),
     }
 
