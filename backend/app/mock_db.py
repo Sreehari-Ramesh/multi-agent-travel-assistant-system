@@ -25,8 +25,7 @@ def _seed_activities() -> None:
             name="Burj Khalifa At The Top - Observation Deck",
             description="Skip-the-line access to Burj Khalifa's observation deck with stunning city views.",
             images=[
-                "https://images.example.com/dubai/burj-khalifa-1.jpg",
-                "https://images.example.com/dubai/burj-khalifa-2.jpg",
+                "https://cdn.pixabay.com/photo/2013/04/21/14/49/dubai-106202_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -54,8 +53,8 @@ def _seed_activities() -> None:
             name="Premium Desert Safari with BBQ Dinner",
             description="Evening desert safari with dune bashing, camel ride, live shows, and BBQ dinner.",
             images=[
-                "https://images.example.com/dubai/desert-safari-1.jpg",
-                "https://images.example.com/dubai/desert-safari-2.jpg",
+                "https://www.desertsafaridubai.com/img/portfolio/1.jpg",
+                "https://www.desertsafaridubai.com/img/portfolio/2.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -83,8 +82,7 @@ def _seed_activities() -> None:
             name="Dubai Marina Dhow Cruise with Dinner",
             description="Relaxing dhow cruise along Dubai Marina with buffet dinner and soft drinks.",
             images=[
-                "https://images.example.com/dubai/marina-cruise-1.jpg",
-                "https://images.example.com/dubai/marina-cruise-2.jpg",
+                "https://cdn.pixabay.com/photo/2013/12/17/23/31/dubai-230075_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -112,7 +110,7 @@ def _seed_activities() -> None:
             name="Dubai Frame Entry Ticket",
             description="Visit Dubai Frame and enjoy panoramic views of old and new Dubai.",
             images=[
-                "https://images.example.com/dubai/frame-1.jpg",
+                "https://cdn.pixabay.com/photo/2021/07/23/07/51/dubai-6486776_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -132,7 +130,7 @@ def _seed_activities() -> None:
             name="Global Village Entry with Transfers",
             description="Evening visit to Global Village with optional transfer from Dubai hotels.",
             images=[
-                "https://images.example.com/dubai/global-village-1.jpg",
+                "https://cdn.pixabay.com/photo/2015/03/18/15/00/global-village-679413_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -160,7 +158,7 @@ def _seed_activities() -> None:
             name="Aquaventure Waterpark at Atlantis",
             description="Full-day access to Aquaventure Waterpark with record-breaking slides.",
             images=[
-                "https://images.example.com/dubai/aquaventure-1.jpg",
+                "https://cdn.pixabay.com/photo/2015/09/14/14/37/aquaventure-939646_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -180,7 +178,7 @@ def _seed_activities() -> None:
             name="Tandem Skydive over The Palm",
             description="Bucket-list tandem skydive with views over Palm Jumeirah.",
             images=[
-                "https://images.example.com/dubai/skydiving-1.jpg",
+                "https://cdn.pixabay.com/photo/2017/09/05/12/52/skydive-2717507_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -211,7 +209,7 @@ def _seed_activities() -> None:
             name="Dubai Miracle Garden Entry",
             description="Access to the world's largest natural flower garden.",
             images=[
-                "https://images.example.com/dubai/miracle-garden-1.jpg",
+                "https://cdn.pixabay.com/photo/2018/09/18/13/29/miracle-garden-dubai-3686191_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -231,7 +229,7 @@ def _seed_activities() -> None:
             name="Dubai Dolphinarium Dolphin & Seal Show",
             description="Family-friendly dolphin and seal show with optional VIP seating.",
             images=[
-                "https://images.example.com/dubai/dolphinarium-1.jpg",
+                "https://cdn.pixabay.com/photo/2016/01/11/01/46/dolphins-1132847_1280.jpg",
             ],
             variations=[
                 ActivityVariation(
@@ -259,7 +257,7 @@ def _seed_activities() -> None:
             name="La Perle by Dragone Show",
             description="Spectacular aqua theater show with gravity-defying stunts.",
             images=[
-                "https://images.example.com/dubai/la-perle-1.jpg",
+                "https://cdn.pixabay.com/photo/2023/08/24/00/58/horse-8209523_1280.jpg",
             ],
             variations=[
                 ActivityVariation(

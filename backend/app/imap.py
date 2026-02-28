@@ -5,7 +5,7 @@ import imaplib
 import email
 from email.header import decode_header
 from urllib.parse import urljoin
-from .config import get_settings
+from config import get_settings
 import email.utils
 
 

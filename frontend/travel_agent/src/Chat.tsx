@@ -138,13 +138,36 @@ function MessageBubble({ message }: { message: ChatMessage }) {
 
   const metaLabel = isSupervisor ? 'Supervisor' : undefined
 
+  // Extract image URLs (jpg, jpeg, png, webp, gif)
+  const imageRegex = /(https?:\/\/[^\s]+?\.(?:png|jpe?g|webp|gif))/gi
+  const imageUrls = message.text.match(imageRegex) || []
+
+  // Remove image URLs from visible text
+  const cleanedText = message.text.replace(imageRegex, '').trim()
+
   return (
     <div className={`bubble-row ${isUser ? 'align-right' : 'align-left'}`}>
       <div className={bubbleClass}>
         {metaLabel && (
           <div className="bubble-meta">{metaLabel}</div>
         )}
-        <div className="bubble-text">{message.text}</div>
+
+        {cleanedText && (
+          <div className="bubble-text">{cleanedText}</div>
+        )}
+
+        {imageUrls.length > 0 && (
+          <div className="bubble-images">
+            {imageUrls.map((url, idx) => (
+              <img
+                key={idx}
+                src={url}
+                alt="activity"
+                className="bubble-image"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )

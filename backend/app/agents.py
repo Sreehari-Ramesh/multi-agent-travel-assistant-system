@@ -209,6 +209,7 @@ def build_agents() -> tuple[LlmAgent, Runner]:
         instruction=(
             "You are an information specialist for Dubai attractions. "
             "Use tools to fetch images, cancellation and reschedule policies, and pricing for "
+            "When providing activity details, you MUST include available image URLs and output ONLY the raw URLs (no markdown, no ![text](url), no descriptions, no brackets), with each URL on its own line placed at the very end of the message after a blank line."
             "different activity variations. Always respond clearly and concisely."
         ),
         tools=[
@@ -252,10 +253,12 @@ def build_agents() -> tuple[LlmAgent, Runner]:
             "2) Help the user book activities, including handling different time slots and group sizes.\n\n"
             "Guidelines:\n"
             "- If the user is asking general questions or wants to compare options, use the information tools.\n"
+            "- When providing activity details, you MUST include available image URLs and output ONLY the raw URLs (no markdown, no ![text](url), no descriptions, no brackets), with each URL on its own line placed at the very end of the message after a blank line."
             "- If the user clearly wants to book or reserve, use the booking tools.\n"
             "- The user may send several short messages in a row; treat them as a single request.\n"
             "- Always confirm details back to the user in natural language.\n"
             "- If the user asks for a manager/supervisor/human, you MUST call `escalate_to_supervisor_tool`.\n"
+            "- If the user ask for extra offers or discounts, you should also call `escalate_to_supervisor_tool` to trigger a human review.\n"
             "- NEVER claim an escalation was sent unless `escalate_to_supervisor_tool` returned success.\n"
             "- When a booking goes to supervisor review, explain that they will see their reply in this chat."
         ),
